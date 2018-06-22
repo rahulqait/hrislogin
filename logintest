@@ -1,0 +1,33 @@
+package hris;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class hristest {
+	
+	
+	WebDriver driver = new ChromeDriver();
+	
+@Test()
+	public void LaunchWebsite() {
+	driver.get("https://hris.qainfotech.com/login.php");
+	WebElement we=  driver.findElement(By.id("txtUserName"));
+	Assert.assertEquals(we.getTagName(), "input");
+	}
+		@Test()
+	public void Login() {
+		// user logs in
+		
+		 driver.findElement(By.id("txtUserName")).sendKeys("HRIS");
+		 driver.findElement(By.id("txtPassword")).sendKeys("rahul"); 
+		 driver.findElement(By.xpath("//*[@id=\"login\"]/form/div[2]/div/input")).click();
+		// Assert.assertNotSame("https://hris.qainfotech.com/login.php", "https://hris.qainfotech.com:8086/time/timesheet", "fail");
+
+	}
+	
+
+}
