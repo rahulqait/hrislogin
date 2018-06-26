@@ -30,4 +30,48 @@ public class hristest {
 	}
 	
 
+}//package hris;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
+
+public class hristest {
+
+	WebDriver driver = new ChromeDriver();
+
+	@Test()
+	public void LaunchWebsite() {
+//		WebElement we = driver.findElement(By.id("txtUserName"));
+//		Assert.assertEquals(we.getTagName(), "input");\
+		driver.findElement(By.id("txtUserName")).isDisplayed();
+		Assert.assertEquals(driver.findElement(By.id("txtPassword")).isDisplayed(), true);
+		driver.findElement(By.id("txtUserName")).sendKeys("rahuljoshi");
+		driver.findElement(By.id("txtPassword")).sendKeys("Rahul@321#");
+		driver.findElement(By.xpath("//*[@id=\"login\"]/form/div[2]/div/input")).click();
+	}
+
+	@BeforeTest() // login page covered
+	public void Login() {
+		driver.get("https://hris.qainfotech.com/login.php");
+		String str = driver.findElement(By.className("tab-heading")).getText().trim();
+		Assert.assertEquals(str, "Login Here", "pass");
+	}
+
+	@AfterSuite()
+	public void bye() {
+		driver.close();
+	}
 }
+
